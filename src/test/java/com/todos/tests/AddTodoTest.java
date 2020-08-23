@@ -2,6 +2,7 @@ package com.todos.tests;
 
 import java.io.IOException;
 
+import org.junit.Assert;
 import org.testng.annotations.Test;
 
 import com.todos.pages.ToDoPage;
@@ -19,7 +20,14 @@ public class AddTodoTest extends Setup {
 	@Test()
 	public void iCanAddTodo() throws IOException {
 		todoPage = new ToDoPage();
-		todoPage.sendToDo(prop.getProperty("todo1"));
+		boolean elementText=todoPage.isElementDisplayed(ToDoPage.inputText);
+		Assert.assertTrue(elementText);
+		todoPage.submitTodo(prop.getProperty("todo1"));
+		String elementTodo=todoPage.checkElementContain(ToDoPage.element1);
+		Assert.assertTrue(elementTodo.contains(prop.getProperty("todo1")));
+		boolean checkbox=todoPage.isCheckboxSelected(ToDoPage.chechkbox);
+		Assert.assertTrue(checkbox);
 	}
+	
 
 }
