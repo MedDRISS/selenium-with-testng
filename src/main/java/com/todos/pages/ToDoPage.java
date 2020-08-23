@@ -23,6 +23,7 @@ public class ToDoPage extends BasePage {
 	final static String INPUT_TEXT = "//input[@ng-model= 'newTodo']";
 	final static String ELEMENT_1 = "/html/body/ng-view/section/section/ul/li[1]/div/label";
 	final static String CHECKBOX = "//input[@type= 'checkbox']";
+	final static String REMOVE_ELEMENT = "//button[@class= 'clear-completed']";
 	
 
 /* @FindBy */
@@ -32,7 +33,9 @@ public class ToDoPage extends BasePage {
 	@FindBy(how = How.XPATH, using = ELEMENT_1)
 	public static WebElement element1;
 	@FindBy(how = How.XPATH, using = CHECKBOX)
-	public static WebElement chechkbox;
+	public static WebElement checkbox;
+	@FindBy(how = How.XPATH, using = REMOVE_ELEMENT)
+	public static WebElement removeElement;
 	
 	/* add method */
 	
@@ -40,7 +43,6 @@ public class ToDoPage extends BasePage {
 		
 		writeText(inputText, todo);
 		inputText.sendKeys(Keys.ENTER);
-		
 	}
 	
 	public Boolean isElementDisplayed(WebElement element) {
@@ -59,6 +61,17 @@ public class ToDoPage extends BasePage {
 		
 		Boolean isCheckboxSelected=element.isSelected();
 		return isCheckboxSelected;
+	}
+	
+	public void removeElement1() {
+		
+		click(removeElement);
+	}
+	
+	public String getPageSource() {
+		
+		String element=driver.getPageSource();
+		return element;
 	}
 	
 }
